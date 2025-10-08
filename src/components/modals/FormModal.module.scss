@@ -1,0 +1,28 @@
+@use "@styles/variables" as vars;
+
+.container {
+    flex: 0.4;
+    border-radius: vars.$border-radius-form;
+    background-color: vars.$white;
+    outline: none;
+
+    .body {
+        padding: 1.5rem 1rem 0.5rem 1rem;
+        display: grid;
+        row-gap: 1rem;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .footer {
+        padding: 1.5rem 1rem 1rem 1rem;
+        display: flex;
+        justify-content: end;
+
+        button {
+            font-weight: 500;
+            border-radius: .8rem;
+        }
+    }
+
+}
