@@ -1,0 +1,38 @@
+@use '@styles/variables' as vars;
+
+.header {
+    height: 3.75rem;
+    width: 100%;
+    padding: 0.65rem 1.5rem;
+    border-bottom: 1px solid vars.$light-grey-border;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    background-color: vars.$white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+
+    .left-container {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        flex-direction: row;
+        gap: 0.75rem;
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .logo {
+            color: vars.$purple;
+        }
+    }
+
+    .side-menu {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+}

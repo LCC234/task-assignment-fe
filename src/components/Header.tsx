@@ -1,0 +1,22 @@
+import { Avatar } from "@mui/material";
+import styles from "./Header.module.scss";
+import { HiSparkles } from "react-icons/hi";
+
+function Header() {
+    return (
+        <header className={styles.header}>
+            <div className={styles["left-container"]}>
+                <HiSparkles className={styles["logo"]} size={"1.6rem"}/>
+                <span className={styles["title"]}>
+                    HR Management System
+                </span>
+            </div>
+
+            <div className={styles["side-menu"]}>
+                <Avatar sx={{ bgcolor: "#7b77ccff" }}>A</Avatar>
+            </div>
+        </header>
+    );
+}
+
+export default Header;
