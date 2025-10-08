@@ -1,0 +1,52 @@
+@use '@styles/variables' as vars;
+
+
+.plain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.8rem 2.8rem;
+
+    .spacer {
+        width: 0.8rem;
+    }
+
+
+}
+
+.outlined {
+    border: 2px solid vars.$black;
+    border-radius: vars.$border-radius-btn;
+    background-color: transparent;
+    color: vars.$black;
+
+    &:hover {
+        background-color: vars.$light-grey;
+    }
+
+}
+
+.filled {
+    background-color: vars.$black;
+    color: vars.$white;
+    border-radius: vars.$border-radius-btn;
+    border: none;
+
+    &:hover {
+        background-color: vars.$dark-grey;
+    }
+}
+
+.disabled {
+    background-color: vars.$light-grey;
+    color: vars.$light-grey-2;
+    border-radius: vars.$border-radius-btn;
+    border: none;
+    cursor: not-allowed;
+
+    &:hover {
+        background-color: vars.$light-grey;
+    }
+}

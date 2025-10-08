@@ -1,0 +1,22 @@
+.container {
+    width: 100%;
+    height: 100%;
+
+    .header {
+        width: 100%;
+        padding: 2rem 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .create-button{
+            padding: 0.6rem 2rem;
+        }
+
+    }
+}
