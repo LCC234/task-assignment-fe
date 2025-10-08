@@ -1,0 +1,103 @@
+@use 'variables' as vars;
+@use 'fonts';
+@use "sass:list";
+
+/**
+* Global Styles
+*/
+html,
+body,
+#root {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    color: vars.$black;
+}
+
+html * {
+    box-sizing: border-box;
+}
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+* {
+    font-family: vars.$base-font-family;
+}
+
+/**
+* Scrollbar Styles
+*/
+%scrollbar {
+    width: vars.$scrollbar-width;
+    height: vars.$scrollbar-height;
+
+}
+
+%scrollbar-track {
+    background: transparent;
+}
+
+%scrollbar-thumb {
+    background: transparent;
+    border-radius: 50px;
+
+    &:hover {
+        background: #bbbbbb77;
+    }
+}
+
+::-webkit-scrollbar {
+    @extend %scrollbar;
+}
+
+::-webkit-scrollbar-track {
+    @extend %scrollbar-track;
+}
+
+::-webkit-scrollbar-thumb {
+    @extend %scrollbar-thumb;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #00000000;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #bbbbbb77 transparent;
+}
+
+/**
+* Breakpoints for responsiveness
+*/
+$breakpoints: (
+    small: 0px 12px,
+    medium: 800px 14px,
+    large: 1280px 16px,
+    xlarge: 1600px 18px,
+    xxlarge: 1920px 20px
+);
+
+@each $breakpoint, $settings in $breakpoints {
+    @media only screen and (min-width: list.nth($settings, 1)) {
+        html {
+            font-size: list.nth($settings, 2);
+        }
+    }
+}
