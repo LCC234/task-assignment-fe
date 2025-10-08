@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { baseApi } from "../services/base";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import { baseApi } from "../services/base";
 
 const rootReducer = combineReducers({
     [baseApi.reducerPath]: baseApi.reducer,
