@@ -1,14 +1,14 @@
 import { Avatar } from "@mui/material";
 import styles from "./Header.module.scss";
-import { HiSparkles } from "react-icons/hi";
+import { PiProjectorScreenChartFill  } from "react-icons/pi";
 
 function Header() {
     return (
         <header className={styles.header}>
             <div className={styles["left-container"]}>
-                <HiSparkles className={styles["logo"]} size={"1.6rem"}/>
+                <PiProjectorScreenChartFill  className={styles["logo"]} size={"1.6rem"}/>
                 <span className={styles["title"]}>
-                    HR Management System
+                    Task Management Portal
                 </span>
             </div>
 
