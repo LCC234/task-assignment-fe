@@ -38,7 +38,8 @@ function TextInput({
     error = false,
     textInputRef: ref,
     onKeyDown,
-    autoComplete = "off"
+    autoComplete = "off",
+    multiline = false,
 }: {
     label?: string;
     value: string;
@@ -54,6 +55,7 @@ function TextInput({
     error?: boolean;
     textInputRef?: React.Ref<HTMLInputElement>;
     onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    multiline?: boolean;
     autoComplete?: string
 }) {
     return (
@@ -116,6 +118,7 @@ function TextInput({
 
                 <OutlinedInput
                     autoComplete={autoComplete}
+                    multiline={multiline}
                     type={type}
                     value={value}
                     onChange={(e) =>

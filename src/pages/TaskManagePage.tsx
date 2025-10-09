@@ -69,7 +69,10 @@ function TaskManagePage() {
                 btnOnClick={() => {}}
                 formState={createTaskFormState}
             >
-                <AddTaskFormComponent />
+                <AddTaskFormComponent 
+                    formData={createTaskFormData}
+                    setFormData={setCreateTaskFormData}
+                />
             </FormModal>
                 
         </>
