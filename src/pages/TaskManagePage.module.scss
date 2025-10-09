@@ -24,20 +24,5 @@
 }
 
 .form-content {
-    .create-task-btn {
-        padding: 0.8rem 0rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px dashed vars.$light-grey-4;
-        border-radius: vars.$border-radius-btn;
-        font-size: 0.8rem;
-        color: vars.$dark-grey;
-        cursor: pointer;
-
-        &:hover {
-            background-color: vars.$light-grey;
-        }
-    }
+    
 }

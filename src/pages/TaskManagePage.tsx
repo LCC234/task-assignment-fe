@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
-import Button, { ButtonStyleType } from "../components/button/Button";
-import styles from "./TaskManagePage.module.scss";
 import { IoMdAddCircle } from "react-icons/io";
-import FormModal from "../components/modals/FormModal";
-import { FormState } from "../models/forms/common";
-import { AddTaskForm, defaultAddTaskForm, isTaskFormValid } from "../models/forms/AddTask";
+import Button, { ButtonStyleType } from "../components/button/Button";
 import AddTaskFormComponent from "../components/forms/AddTaskFormComponent";
-import { defaultSkillItems } from "../models/Skill";
-import { useGetSkillsQuery } from "../services/skillService";
-import { useGetDevelopersQuery } from "../services/developerService";
+import FormModal from "../components/modals/FormModal";
 import { convertDevelopersToMap } from "../models/developer";
-import { useDeduceSkillsRequiredMutation } from "../services/aiService";
-import { MdDelete } from "react-icons/md";
-import { TiFlowChildren } from "react-icons/ti";
-import { IoAdd } from "react-icons/io5";
-import { useCreateTaskMutation } from "../services/taskService";
+import { AddTaskForm, defaultAddTaskForm, isTaskFormValid } from "../models/forms/AddTask";
+import { FormState } from "../models/forms/common";
+import { defaultSkillItems } from "../models/Skill";
 import { Task } from "../models/task";
+import { useGetDevelopersQuery } from "../services/developerService";
+import { useGetSkillsQuery } from "../services/skillService";
+import { useCreateTaskMutation } from "../services/taskService";
 import NestedTaskView from "./components/NestedTaskView";
+import styles from "./TaskManagePage.module.scss";
 
 function TaskManagePage() {
 
@@ -28,15 +24,15 @@ function TaskManagePage() {
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
 
     const [newTaskList, setNewTaskList] = useState<Task[]>([
-        {
-            title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 0, id: 0
-        },
-        {
-            title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 1, id: 1
-        },
-        {
-            title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 2, id: 1
-        },
+        // {
+        //     title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 0, id: 0
+        // },
+        // {
+        //     title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 1, id: 1
+        // },
+        // {
+        //     title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 2, id: 1
+        // },
     ]);
 
     const {
@@ -57,7 +53,6 @@ function TaskManagePage() {
         }
     );
 
-    const [deduceSkillsRequired] = useDeduceSkillsRequiredMutation();
 
     const [createTask] = useCreateTaskMutation();
 
@@ -93,10 +88,11 @@ function TaskManagePage() {
                 isModalVisible={isTaskTreeModalOpen}
                 setModalVisible={(visible: boolean) => setIsTaskTreeModalOpen(visible)}
                 title="Create New Task Tree"
-                btnLabel="Exit"
+                btnLabel="Done"
                 btnHoverText="Create task tree"
                 btnOnClick={() => { }}
                 formState={taskTreeFormState}
+                showFooterBtn={newTaskList.length > 0}
             >
                 <div className={styles["form-content"]}>
                     <NestedTaskView
@@ -121,6 +117,7 @@ function TaskManagePage() {
                             // setIsTaskTreeModalOpen(false);
                             // setIsCreateTaskFormModalOpen(true);
                         }}
+                        skillMap={skillData ? skillData : {}}
                     />
                 </div>
             </FormModal>
@@ -128,7 +125,7 @@ function TaskManagePage() {
             <FormModal
                 isModalVisible={isCreateTaskFormModalOpen}
                 setModalVisible={(visible: boolean) => setIsCreateTaskFormModalOpen(visible)}
-                title={"New Task Details" + (createTaskFormData.depth > 0 ? ` (Sub-task, Level ${createTaskFormData.depth})` : "(Root Task)")}
+                title={"New Task Details" + (createTaskFormData.depth > 0 ? ` (Sub-task, Level ${createTaskFormData.depth})` : " (Root Task)")}
                 btnLabel="Confirm"
                 btnHoverText="Confirm task details"
                 onClose={() => {

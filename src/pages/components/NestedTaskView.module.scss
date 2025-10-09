@@ -1,9 +1,25 @@
 @use '@styles/variables' as vars;
 
-.container{
+.container {
     width: 100%;
     height: 100%;
 
+    .create-task-btn {
+        padding: 0.8rem 0rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px dashed vars.$light-grey-4;
+        border-radius: vars.$border-radius-btn;
+        font-size: 0.8rem;
+        color: vars.$dark-grey;
+        cursor: pointer;
+
+        &:hover {
+            background-color: vars.$light-grey;
+        }
+    }
 
     .task-item {
         padding: 0.8rem 1rem;
@@ -19,6 +35,19 @@
         .task-title {
             font-size: 0.8rem;
             color: vars.$dark-grey;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+
+            .task-skill-tag {
+                // background-color: vars.$red;
+                color: vars.$white;
+                padding: 0.1rem 0.4rem;
+                font-size: .6rem;
+                border-radius: vars.$border-radius-btn;
+            }
         }
 
         .task-icons {
@@ -29,13 +58,14 @@
 
             svg {
                 cursor: pointer;
+
                 &:hover {
                     color: vars.$purple;
                 }
             }
 
 
-          
+
         }
     }
 }

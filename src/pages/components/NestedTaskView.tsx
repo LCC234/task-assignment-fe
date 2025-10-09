@@ -4,6 +4,8 @@ import { TiFlowChildren } from 'react-icons/ti';
 import { Task } from '../../models/task';
 import styles from './NestedTaskView.module.scss';
 import { MdModeEdit } from "react-icons/md";
+import { SkillMap } from '../../services/dto/skills/getSkills';
+import { COLORS } from '../../styles/stylings';
 
 function NestedTaskView({
     taskList,
@@ -12,6 +14,7 @@ function NestedTaskView({
     onAddChildClick,
     onDeleteClick,
     onEditClick,
+    skillMap,
 }: {
     taskList: Task[];
     onEmptyClick: () => void;
@@ -19,6 +22,7 @@ function NestedTaskView({
     onAddChildClick: (depth: number, taskId?: number | null) => void;
     onDeleteClick: () => void;
     onEditClick: (task: Task) => void;
+    skillMap: SkillMap;
 }) {
     return (
         <div className={styles.container}>
@@ -33,18 +37,34 @@ function NestedTaskView({
                             <div className={styles["task-item"]}>
                                 <div className={styles["task-title"]}>
                                     {task.title}
+                                    {
+                                        task.skillIds.map((skillId, idx) => {
+                                            if (!skillMap[skillId]) return null;
+                                            return (
+                                                <div key={idx}
+                                                    className={styles["task-skill-tag"]}
+                                                    style={{
+                                                        backgroundColor: `${skillId % 2 === 0 ? COLORS.purple : COLORS.redLight}`,
+                                                     }}
+                                                >
+                                                    {skillMap[skillId]}
+                                                </div>
+                                            );
+                                        })
+                                    }
                                 </div>
                                 <div className={styles["task-icons"]}>
                                     {
                                         task.depth > 0 && (
                                             <IoAdd
                                                 onClick={() => onAddClick(task.depth, task.parentTaskId)}
-
+                                                title='Add Sibling Task'
                                             />
                                         )
                                     }
                                     <TiFlowChildren
                                         onClick={() => onAddChildClick(task.depth, task.id)}
+                                        title='Add Sub-task'
                                     />
                                     {/* <MdDelete
                                         onClick={onDeleteClick}

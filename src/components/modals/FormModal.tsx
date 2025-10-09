@@ -16,10 +16,11 @@ function FormModal({
     btnHoverText,
     btnOnClick,
     formState,
-    submitDisabled = false
+    submitDisabled = false,
+    showFooterBtn = true,
 }: {
     isModalVisible: boolean
-    setModalVisible: (visible: boolean) => void 
+    setModalVisible: (visible: boolean) => void
     onClose?: () => void
     children: React.ReactNode
     title: string
@@ -28,11 +29,12 @@ function FormModal({
     btnOnClick: () => void
     formState: FormState
     submitDisabled?: boolean
+    showFooterBtn?: boolean
 }) {
     return (
         <Modal
             open={isModalVisible}
-            onClose={() => {setModalVisible(false); onClose && onClose()}}
+            onClose={() => { setModalVisible(false); onClose && onClose() }}
             closeAfterTransition
             slotProps={{
                 backdrop: {
@@ -50,24 +52,30 @@ function FormModal({
             <Fade in={isModalVisible}>
                 <div className={styles.container}>
                     <ModalHeader
-                        onClose={() => {setModalVisible(false); onClose && onClose()}}
+                        onClose={() => { setModalVisible(false); onClose && onClose() }}
                         title={title}
                     />
                     <div className={styles["body"]}>
                         {children}
                     </div>
                     <div className={styles["footer"]}>
-                        
-                        <Button
-                            disable={
-                                submitDisabled || formState === FormState.LOADING ||
-                                formState === FormState.SUCCESS
-                            }
-                            label={btnLabel}
-                            onClick={btnOnClick}
-                            hoverText={btnHoverText}
-                            isLoading={formState === FormState.LOADING}
-                        />
+                        {
+                            showFooterBtn && (
+
+
+                                <Button
+                                    disable={
+                                        submitDisabled || formState === FormState.LOADING ||
+                                        formState === FormState.SUCCESS
+                                    }
+                                    label={btnLabel}
+                                    onClick={btnOnClick}
+                                    hoverText={btnHoverText}
+                                    isLoading={formState === FormState.LOADING}
+                                />
+
+                            ) 
+                        }
                     </div>
                 </div>
             </Fade>
