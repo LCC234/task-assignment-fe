@@ -7,6 +7,7 @@ import { FormState } from "../models/forms/common";
 import { AddTaskForm, defaultAddTaskForm } from "../models/forms/AddTask";
 import AddTaskFormComponent from "../components/forms/AddTaskFormComponent";
 import { defaultSkillItems } from "../models/Skill";
+import { useGetSkillsQuery } from "../services/skillService";
 
 function TaskManagePage() {
 
@@ -17,7 +18,9 @@ function TaskManagePage() {
     const [createTaskFormData, setCreateTaskFormData] = useState<AddTaskForm>(defaultAddTaskForm)
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
 
-    const [skillItems, setSkillItems] = useState<{ [key: number]: string }>(defaultSkillItems)
+    const {
+        data: skillData
+    } = useGetSkillsQuery({});
 
     return (
         <>
@@ -74,7 +77,7 @@ function TaskManagePage() {
                 <AddTaskFormComponent 
                     formData={createTaskFormData}
                     setFormData={setCreateTaskFormData}
-                    skillsItems={skillItems}
+                    skillsItems={skillData ? skillData : defaultSkillItems}
                 />
             </FormModal>
                 
