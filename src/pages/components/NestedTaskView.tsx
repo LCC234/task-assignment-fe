@@ -1,11 +1,9 @@
 import { IoAdd } from 'react-icons/io5';
-import { MdDelete } from 'react-icons/md';
 import { TiFlowChildren } from 'react-icons/ti';
 import { Task } from '../../models/task';
-import styles from './NestedTaskView.module.scss';
-import { MdModeEdit } from "react-icons/md";
 import { SkillMap } from '../../services/dto/skills/getSkills';
 import { COLORS } from '../../styles/stylings';
+import styles from './NestedTaskView.module.scss';
 
 function NestedTaskView({
     taskList,

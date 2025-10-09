@@ -129,9 +129,9 @@ function TaskManagePage() {
                 btnLabel="Confirm"
                 btnHoverText="Confirm task details"
                 onClose={() => {
-                    setCreateTaskFormData(defaultAddTaskForm());
-                    setCreateTaskFormState(FormState.DEFAULT);
                     setIsTaskTreeModalOpen(true);
+                    setCreateTaskFormState(FormState.DEFAULT);
+                    setCreateTaskFormData(defaultAddTaskForm());
                 }}
                 btnOnClick={async () => {
                     setCreateTaskFormState(FormState.LOADING);
