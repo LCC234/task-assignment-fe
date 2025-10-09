@@ -3,7 +3,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import { ReactNode } from "react";
-import { BORDERS, COLORS } from "../../styles/stylings";
+import { BORDERS, COLORS, FONTS } from "../../styles/stylings";
 import styles from "./Input.module.scss";
 
 type IconProps = {
@@ -105,6 +105,7 @@ function TextInput({
                     "& .MuiInputBase-root": {
                         height: "100%",
                         fontSize: "0.85rem",
+                        fontFamily: FONTS.default,
                     },
                     "& .MuiInputBase-adornedStart": {
                         "& .MuiInputAdornment-positionStart": {},

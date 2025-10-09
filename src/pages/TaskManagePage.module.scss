@@ -16,15 +16,15 @@
             font-weight: 700;
         }
 
-        .create-button{
+        .create-button {
             padding: 0.6rem 2rem;
         }
 
     }
 }
 
-.form-content{
-    .create-task-btn{
+.form-content {
+    .create-task-btn {
         padding: 0.8rem 0rem;
         width: 100%;
         display: flex;
@@ -38,6 +38,40 @@
 
         &:hover {
             background-color: vars.$light-grey;
+        }
+    }
+
+    .task-item {
+        padding: 0.8rem 1rem;
+        width: 100%;
+        border: 1px solid vars.$light-grey-4;
+        border-radius: vars.$border-radius-btn;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+
+        .task-title {
+            font-size: 0.8rem;
+            color: vars.$dark-grey;
+        }
+
+        .task-icons {
+            font-size: 1.2rem;
+            color: vars.$dark-grey;
+            display: flex;
+            gap: 0.5rem;
+
+            svg {
+                cursor: pointer;
+                &:hover {
+                    color: vars.$purple;
+                }
+            }
+
+
+          
         }
     }
 }
