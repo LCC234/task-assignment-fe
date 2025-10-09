@@ -1,14 +1,17 @@
 import { AddTaskForm } from "../../models/forms/AddTask";
-import TextInput, { FormFieldStyle } from "../input/Input";
+import CustomDropdown from "../dropdowns/CustomDropdown";
+import TextInput, { FormFieldState, FormFieldStyle } from "../input/Input";
 import styles from "./AddTaskFormComponent.module.scss";
 
 
 function AddTaskFormComponent({
     formData,
-    setFormData
-} : {
+    setFormData,
+    skillsItems,
+}: {
     formData: AddTaskForm;
     setFormData: (data: AddTaskForm) => void;
+    skillsItems: { [key: string]: string };
 }) {
 
 
@@ -26,6 +29,21 @@ function AddTaskFormComponent({
                 }
                 styleType={FormFieldStyle.BASIC}
                 multiline={true}
+            />
+            <CustomDropdown
+                label={"Skills Required"}
+                items={skillsItems}
+                value={formData.skillIds}
+                onChange={(event) => {
+                    console.log(event.target.value);
+                    setFormData({
+                        ...formData,
+                        skillIds: typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value,
+                    });
+                }}
+                styleType={FormFieldStyle.BASIC}
+                state={FormFieldState.ENABLE}
+                multiple={true}
             />
         </div>
     );
