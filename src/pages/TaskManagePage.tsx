@@ -6,16 +6,18 @@ import FormModal from "../components/modals/FormModal";
 import { FormState } from "../models/forms/common";
 import { AddTaskForm, defaultAddTaskForm } from "../models/forms/AddTask";
 import AddTaskFormComponent from "../components/forms/AddTaskFormComponent";
+import { defaultSkillItems } from "../models/Skill";
 
 function TaskManagePage() {
 
     const [isTaskTreeModalOpen, setIsTaskTreeModalOpen] = useState(false);
     const [taskTreeFormState, setTaskTreeFormState] = useState<FormState>(FormState.DEFAULT);
     
-
     const [isCreateTaskFormModalOpen, setIsCreateTaskFormModalOpen] = useState(false);
     const [createTaskFormData, setCreateTaskFormData] = useState<AddTaskForm>(defaultAddTaskForm)
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
+
+    const [skillItems, setSkillItems] = useState<{ [key: number]: string }>(defaultSkillItems)
 
     return (
         <>
@@ -72,6 +74,7 @@ function TaskManagePage() {
                 <AddTaskFormComponent 
                     formData={createTaskFormData}
                     setFormData={setCreateTaskFormData}
+                    skillsItems={skillItems}
                 />
             </FormModal>
                 

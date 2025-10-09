@@ -11,7 +11,7 @@ function AddTaskFormComponent({
 }: {
     formData: AddTaskForm;
     setFormData: (data: AddTaskForm) => void;
-    skillsItems: { [key: string]: string };
+    skillsItems: { [key: number]: string };
 }) {
 
 
@@ -38,7 +38,7 @@ function AddTaskFormComponent({
                     console.log(event.target.value);
                     setFormData({
                         ...formData,
-                        skillIds: typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value,
+                        skillIds: (typeof event.target.value === 'string' || typeof event.target.value === 'number') ? event.target.value.split(',') : event.target.value,
                     });
                 }}
                 styleType={FormFieldStyle.BASIC}
