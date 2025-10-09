@@ -90,7 +90,16 @@ function TaskManagePage() {
                 title="Create New Task Tree"
                 btnLabel="Done"
                 btnHoverText="Create task tree"
-                btnOnClick={() => { }}
+                btnOnClick={() => { 
+                    setIsTaskTreeModalOpen(false); 
+                    // setNewTaskList([]);
+                    // setTaskTreeFormState(FormState.DEFAULT);
+                }}
+                onClose={() => { 
+                    setIsTaskTreeModalOpen(false); 
+                    // setNewTaskList([]);
+                    // setTaskTreeFormState(FormState.DEFAULT);
+                }}
                 formState={taskTreeFormState}
                 showFooterBtn={newTaskList.length > 0}
             >
