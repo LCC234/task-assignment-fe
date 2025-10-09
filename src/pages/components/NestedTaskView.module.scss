@@ -1,0 +1,41 @@
+@use '@styles/variables' as vars;
+
+.container{
+    width: 100%;
+    height: 100%;
+
+
+    .task-item {
+        padding: 0.8rem 1rem;
+        width: 100%;
+        border: 1px solid vars.$light-grey-4;
+        border-radius: vars.$border-radius-btn;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+
+        .task-title {
+            font-size: 0.8rem;
+            color: vars.$dark-grey;
+        }
+
+        .task-icons {
+            font-size: 1.2rem;
+            color: vars.$dark-grey;
+            display: flex;
+            gap: 0.5rem;
+
+            svg {
+                cursor: pointer;
+                &:hover {
+                    color: vars.$purple;
+                }
+            }
+
+
+          
+        }
+    }
+}

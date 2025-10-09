@@ -14,6 +14,9 @@ import { useDeduceSkillsRequiredMutation } from "../services/aiService";
 import { MdDelete } from "react-icons/md";
 import { TiFlowChildren } from "react-icons/ti";
 import { IoAdd } from "react-icons/io5";
+import { useCreateTaskMutation } from "../services/taskService";
+import { Task } from "../models/task";
+import NestedTaskView from "./components/NestedTaskView";
 
 function TaskManagePage() {
 
@@ -24,9 +27,17 @@ function TaskManagePage() {
     const [createTaskFormData, setCreateTaskFormData] = useState<AddTaskForm>(defaultAddTaskForm)
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
 
-    const [newTaskList, setNewTaskList] = useState<AddTaskForm[]>([{
-        title: 'Gaming', parentId: null, assignToId: '', status: 'To-Do', skillIds: ["1"], depth: 0
-    }]);
+    const [newTaskList, setNewTaskList] = useState<Task[]>([
+        {
+            title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 0, id: 0
+        },
+        {
+            title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 1, id: 1
+        },
+        {
+            title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 2, id: 1
+        },
+    ]);
 
     const {
         data: skillData
@@ -47,6 +58,8 @@ function TaskManagePage() {
     );
 
     const [deduceSkillsRequired] = useDeduceSkillsRequiredMutation();
+
+    const [createTask] = useCreateTaskMutation();
 
     useEffect(() => {
         console.log("newTaskList updated:", newTaskList, createTaskFormState);
@@ -80,47 +93,42 @@ function TaskManagePage() {
                 isModalVisible={isTaskTreeModalOpen}
                 setModalVisible={(visible: boolean) => setIsTaskTreeModalOpen(visible)}
                 title="Create New Task Tree"
-                btnLabel="Create"
+                btnLabel="Exit"
                 btnHoverText="Create task tree"
                 btnOnClick={() => { }}
                 formState={taskTreeFormState}
             >
                 <div className={styles["form-content"]}>
-                    {
-                        newTaskList.length === 0 ? (
-                            <div className={styles["create-task-btn"]} onClick={() => {
-                                setIsTaskTreeModalOpen(false);
-                                setIsCreateTaskFormModalOpen(true);
-                            }}>
-                                New Task
-                            </div>
-                        ) : (
-                            newTaskList.map((task, index) => (
-                                <div key={index} className={styles["task-item"]}>
-                                    <div className={styles["task-title"]}>
-                                        {task.title}
-                                    </div>
-                                    <div className={styles["task-icons"]}>
-                                        {
-                                            task.depth > 0 && (
-                                                <IoAdd />
-                                            )
-                                        }
-                                        <TiFlowChildren />
-                                        <MdDelete />
-                                    </div>
-                                </div>
-                            ))
-                        )
-                    }
-
+                    <NestedTaskView
+                        taskList={newTaskList}
+                        onEmptyClick={() => {
+                            setIsTaskTreeModalOpen(false);
+                            setIsCreateTaskFormModalOpen(true);
+                        }}
+                        onAddClick={(depth: number, parentTaskId?: number | null) => {
+                            setCreateTaskFormData(defaultAddTaskForm(depth, parentTaskId));
+                            setIsTaskTreeModalOpen(false);
+                            setIsCreateTaskFormModalOpen(true);
+                        }}
+                        onAddChildClick={(depth: number, taskId?: number | null) => {
+                            setCreateTaskFormData(defaultAddTaskForm(depth + 1, taskId));
+                            setIsTaskTreeModalOpen(false);
+                            setIsCreateTaskFormModalOpen(true);
+                        }}
+                        onDeleteClick={() => { }}
+                        onEditClick={(task: Task) => {
+                            // setCreateTaskFormData(defaultAddTaskForm(task.depth, task.parentTaskId));
+                            // setIsTaskTreeModalOpen(false);
+                            // setIsCreateTaskFormModalOpen(true);
+                        }}
+                    />
                 </div>
             </FormModal>
 
             <FormModal
                 isModalVisible={isCreateTaskFormModalOpen}
                 setModalVisible={(visible: boolean) => setIsCreateTaskFormModalOpen(visible)}
-                title="New Task Details"
+                title={"New Task Details" + (createTaskFormData.depth > 0 ? ` (Sub-task, Level ${createTaskFormData.depth})` : "(Root Task)")}
                 btnLabel="Confirm"
                 btnHoverText="Confirm task details"
                 onClose={() => {
@@ -132,20 +140,40 @@ function TaskManagePage() {
                     setCreateTaskFormState(FormState.LOADING);
                     const taskForm: AddTaskForm = createTaskFormData;
                     try {
-                        const skillRequired = await deduceSkillsRequired({ description: createTaskFormData.title }).unwrap();
-                        if (skillRequired && skillRequired.skillIds) {
-                            taskForm.skillIds = skillRequired.skillIds.map(id => id.toString());
-                        }
+                        const createdTask = await createTask({
+                            title: taskForm.title,
+                            parentTaskId: taskForm.parentId ? taskForm.parentId : null,
+                            assignedDeveloperId: taskForm.assignToId ? parseInt(taskForm.assignToId) : null,
+                            status: taskForm.status,
+                            skillIds: taskForm.skillIds.map(id => parseInt(id)),
+                            depth: taskForm.depth,
+                        }).unwrap();
+                        console.log("Task created successfully:", createdTask);
 
+                        // add the created task next to the parent id if exists, otherwise add to the end of the list
+                        if (createdTask.parentTaskId) {
+                            const parentIndex = newTaskList.findIndex(task => task.id === createdTask.parentTaskId);
+                            if (parentIndex !== -1) {
+                                const updatedTaskList = [...newTaskList];
+                                updatedTaskList.splice(parentIndex + 1, 0, createdTask);
+                                setNewTaskList(updatedTaskList);
+                            } else {
+                                setNewTaskList([...newTaskList, createdTask]);
+                            }
+                        } else {
+                            setNewTaskList([...newTaskList, createdTask]);
+                        }
+                        // setNewTaskList([...newTaskList, createdTask]);
+                        setCreateTaskFormData(defaultAddTaskForm());
+                        setCreateTaskFormState(FormState.DEFAULT);
+                        setIsCreateTaskFormModalOpen(false);
+                        setIsTaskTreeModalOpen(true);
                     } catch (error) {
                         console.error("Error creating task:", error);
                         // setCreateTaskFormState(FormState.ERROR);
                     }
-                    setNewTaskList([...newTaskList, taskForm]);
-                    setCreateTaskFormData(defaultAddTaskForm());
-                    setCreateTaskFormState(FormState.DEFAULT);
-                    setIsCreateTaskFormModalOpen(false);
-                    setIsTaskTreeModalOpen(true);
+                    // setNewTaskList([...newTaskList, taskForm]);
+
 
                 }}
                 formState={createTaskFormState}
