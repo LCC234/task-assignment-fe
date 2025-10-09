@@ -100,10 +100,11 @@ function TextInput({
                             color: error ? COLORS.red : COLORS.purple,
                         },
                         "&.MuiFormLabel-filled": {},
-                        fontSize: "1rem",
+                        fontSize: "0.85rem",
                     },
                     "& .MuiInputBase-root": {
                         height: "100%",
+                        fontSize: "0.85rem",
                     },
                     "& .MuiInputBase-adornedStart": {
                         "& .MuiInputAdornment-positionStart": {},
