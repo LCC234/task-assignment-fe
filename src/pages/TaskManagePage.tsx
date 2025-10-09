@@ -176,7 +176,7 @@ function TaskManagePage() {
                         setIsTaskTreeModalOpen(true);
                     } catch (error) {
                         console.error("Error creating task:", error);
-                        // setCreateTaskFormState(FormState.ERROR);
+                        setCreateTaskFormState(FormState.ERROR);
                     }
                     // setNewTaskList([...newTaskList, taskForm]);
 
