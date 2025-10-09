@@ -8,12 +8,14 @@ import { AddTaskForm, defaultAddTaskForm } from "../models/forms/AddTask";
 import AddTaskFormComponent from "../components/forms/AddTaskFormComponent";
 import { defaultSkillItems } from "../models/Skill";
 import { useGetSkillsQuery } from "../services/skillService";
+import { useGetDevelopersQuery } from "../services/developerService";
+import { convertDevelopersToMap } from "../models/developer";
 
 function TaskManagePage() {
 
     const [isTaskTreeModalOpen, setIsTaskTreeModalOpen] = useState(false);
     const [taskTreeFormState, setTaskTreeFormState] = useState<FormState>(FormState.DEFAULT);
-    
+
     const [isCreateTaskFormModalOpen, setIsCreateTaskFormModalOpen] = useState(false);
     const [createTaskFormData, setCreateTaskFormData] = useState<AddTaskForm>(defaultAddTaskForm)
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
@@ -21,6 +23,17 @@ function TaskManagePage() {
     const {
         data: skillData
     } = useGetSkillsQuery({});
+
+    const {
+        data: developerData,
+    } = useGetDevelopersQuery(
+        {
+            requiredSkillsIDs: createTaskFormData.skillIds.length > 0 ? createTaskFormData.skillIds.map(id => parseInt(id)) : []
+        },
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    );
 
     return (
         <>
@@ -31,9 +44,9 @@ function TaskManagePage() {
                     </div>
                     <Button
                         label="Create"
-                        onClick={() => { 
+                        onClick={() => {
                             setIsTaskTreeModalOpen(true);
-                         }}
+                        }}
                         className={styles["create-button"]}
                         hoverText="Create a new task"
                         styleType={ButtonStyleType.FILLED}
@@ -52,7 +65,7 @@ function TaskManagePage() {
                 title="Create New Task Tree"
                 btnLabel="Create"
                 btnHoverText="Create task tree"
-                btnOnClick={() => {}}
+                btnOnClick={() => { }}
                 formState={taskTreeFormState}
             >
                 <div className={styles["form-content"]}>
@@ -71,16 +84,17 @@ function TaskManagePage() {
                 title="Create New Task"
                 btnLabel="Create"
                 btnHoverText="Create task"
-                btnOnClick={() => {}}
+                btnOnClick={() => { }}
                 formState={createTaskFormState}
             >
-                <AddTaskFormComponent 
+                <AddTaskFormComponent
                     formData={createTaskFormData}
                     setFormData={setCreateTaskFormData}
                     skillsItems={skillData ? skillData : defaultSkillItems}
+                    developerItems={convertDevelopersToMap(developerData ? developerData : [])}
                 />
             </FormModal>
-                
+
         </>
     );
 }

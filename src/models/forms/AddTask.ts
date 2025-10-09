@@ -3,7 +3,7 @@ import { TaskStatus } from "../TaskStatus";
 export interface AddTaskForm {
     title: string;
     parentId?: string | null;
-    assignToId?: string | null;
+    assignToId: string;
     status: string;
     skillIds: string[];
 }
@@ -11,7 +11,7 @@ export interface AddTaskForm {
 export const defaultAddTaskForm: AddTaskForm = {
     title: "",
     parentId: null,
-    assignToId: null,
+    assignToId: "",
     status: TaskStatus.ToDo,
     skillIds: [],
 };

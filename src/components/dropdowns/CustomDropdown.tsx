@@ -132,7 +132,6 @@ function CustomDropdown({
                             : true
                     }
                     renderValue={(value: string) => {
-                        console.log(value);
                         if (
                             !value &&
                             styleType !== FormFieldStyle.LABEL_ANIMATION

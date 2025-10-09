@@ -8,10 +8,12 @@ function AddTaskFormComponent({
     formData,
     setFormData,
     skillsItems,
+    developerItems
 }: {
     formData: AddTaskForm;
     setFormData: (data: AddTaskForm) => void;
     skillsItems: { [key: number]: string };
+    developerItems: { [key: string]: string };
 }) {
 
 
@@ -35,7 +37,6 @@ function AddTaskFormComponent({
                 items={skillsItems}
                 value={formData.skillIds}
                 onChange={(event) => {
-                    console.log(event.target.value);
                     setFormData({
                         ...formData,
                         skillIds: (typeof event.target.value === 'string' || typeof event.target.value === 'number') ? event.target.value.split(',') : event.target.value,
@@ -44,6 +45,19 @@ function AddTaskFormComponent({
                 styleType={FormFieldStyle.BASIC}
                 state={FormFieldState.ENABLE}
                 multiple={true}
+            />
+            <CustomDropdown
+                label={"Assigned Developer (Skills must be chosen first)"}
+                items={developerItems}
+                value={formData.assignToId}
+                onChange={(event) => {
+                    setFormData({
+                        ...formData,
+                        assignToId: event.target.value as string,
+                    });
+                }}
+                styleType={FormFieldStyle.BASIC}
+                state={FormFieldState.ENABLE}
             />
         </div>
     );
