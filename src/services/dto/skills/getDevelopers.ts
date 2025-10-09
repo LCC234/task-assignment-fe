@@ -3,6 +3,7 @@ import { Developer } from "../../../models/developer";
 
 export interface GetDevelopersRequest {
     requiredSkillsIDs?: number[];
+    all?: boolean;
 }
 
 export interface GetDevelopersResponse {
@@ -20,6 +21,7 @@ export const developerAdapter = (data: GetDevelopersResponse[]): Developer[] => 
     return data.map(item => ({
         id: item.id,
         name: item.name,
-        skills: item.developer_skills.map(skill => skill.skills.name)
+        skills: item.developer_skills.map(skill => skill.skills.name),
+        skillIds: item.developer_skills.map(skill => skill.skills.id)
     }));
 };

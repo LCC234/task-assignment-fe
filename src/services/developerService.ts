@@ -17,6 +17,9 @@ const developerService = baseApi.injectEndpoints({
                         searchParams.append("requiredSkillsIDs", id.toString());
                     });
                 }
+                if (request.all) {
+                    searchParams.append("all", "true");
+                }
                 return {
                     url: DEVELOPERS_API + `?${searchParams.toString()}`,
                     method: "GET",

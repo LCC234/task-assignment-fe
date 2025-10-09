@@ -44,7 +44,6 @@ function TaskManagePage() {
 
     const {
         data: developerData,
-
     } = useGetDevelopersQuery(
         {
             requiredSkillsIDs: createTaskFormData.skillIds.length > 0 ? createTaskFormData.skillIds.map(id => parseInt(id)) : []
