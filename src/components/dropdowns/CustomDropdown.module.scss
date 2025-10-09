@@ -1,0 +1,129 @@
+@use "@styles/variables" as vars;
+
+.container {
+    
+
+
+    .dropdown {
+
+        .dropdown-label{
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: vars.$grey;
+            font-size: 0.8rem;
+        }
+        .select {
+            width: 100%;
+        }
+
+        .font-style {
+            font-size: 0.85rem;
+        }
+
+        fieldset {
+            border: 1px solid vars.$light-grey-border;
+            border-radius: vars.$border-radius-form;
+            // height: 2.5rem;
+        }
+
+        .placeholder{
+            color: vars.$black-trans;
+        }
+
+        &:hover fieldset {
+            border-color: vars.$light-grey-2;
+        }
+    }
+
+    .dropdown-disabled {
+
+        .dropdown-label{
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: vars.$grey;
+            font-size: 0.875rem;
+        }
+        .select {
+            width: 100%;
+        }
+
+        .font-style {
+            font-size: 1rem;
+        }
+
+        fieldset {
+            border: 1px solid vars.$light-grey-border;
+            border-radius: vars.$border-radius-form;
+            // height: 2.5rem;
+        }
+
+        svg {
+            color: vars.$light-grey-2;
+        }
+
+        .placeholder{
+            color: vars.$light-grey-4;
+        }
+
+        &:hover fieldset {
+            border-color: vars.$light-grey-border;
+        }
+    }
+
+    .dropdown-disabled-grey-label {
+
+        .dropdown-label{
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: vars.$light-grey-4;
+            font-size: 0.875rem;
+        }
+        .select {
+            width: 100%;
+        }
+
+        .font-style {
+            font-size: 1rem;
+        }
+
+        fieldset {
+            border: 1px solid vars.$light-grey-border;
+            border-radius: vars.$border-radius-form;
+            // height: 2.5rem;
+        }
+
+        svg {
+            color: vars.$light-grey-2;
+        }
+
+        .placeholder{
+            color: vars.$light-grey-4;
+        }
+
+        &:hover fieldset {
+            border-color: vars.$light-grey-border;
+        }
+    }
+
+    .error{
+        fieldset {
+            border: 1px solid vars.$red-light;
+        }
+
+        &:hover fieldset {
+            border-color: vars.$red;
+        }
+
+        svg {
+            color: vars.$red-light;
+        }
+
+        .dropdown-label{
+            color: vars.$red-light;
+        }
+
+        .placeholder{
+            color: vars.$red-light-opacity;
+        }
+    }
+}
