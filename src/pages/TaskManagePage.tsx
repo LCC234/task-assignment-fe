@@ -4,13 +4,18 @@ import styles from "./TaskManagePage.module.scss";
 import { IoMdAddCircle } from "react-icons/io";
 import FormModal from "../components/modals/FormModal";
 import { FormState } from "../models/forms/common";
+import { AddTaskForm, defaultAddTaskForm } from "../models/forms/AddTask";
+import AddTaskFormComponent from "../components/forms/AddTaskFormComponent";
 
 function TaskManagePage() {
 
-    const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
-    const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
+    const [isTaskTreeModalOpen, setIsTaskTreeModalOpen] = useState(false);
+    const [taskTreeFormState, setTaskTreeFormState] = useState<FormState>(FormState.DEFAULT);
+    
 
-    const [isTaskFormModalOpen, setIsTaskFormModalOpen] = useState(false);
+    const [isCreateTaskFormModalOpen, setIsCreateTaskFormModalOpen] = useState(false);
+    const [createTaskFormData, setCreateTaskFormData] = useState<AddTaskForm>(defaultAddTaskForm)
+    const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
 
     return (
         <>
@@ -22,7 +27,7 @@ function TaskManagePage() {
                     <Button
                         label="Create"
                         onClick={() => { 
-                            setIsCreateTaskModalOpen(true);
+                            setIsTaskTreeModalOpen(true);
                          }}
                         className={styles["create-button"]}
                         hoverText="Create a new task"
@@ -37,19 +42,34 @@ function TaskManagePage() {
                 </div>
             </div>
             <FormModal
-                isModalVisible={isCreateTaskModalOpen}
-                setModalVisible={(visible: boolean) => setIsCreateTaskModalOpen(visible)}
-                title="Create New Tasks"
+                isModalVisible={isTaskTreeModalOpen}
+                setModalVisible={(visible: boolean) => setIsTaskTreeModalOpen(visible)}
+                title="Create New Task Tree"
                 btnLabel="Create"
-                btnHoverText="Create tasks"
+                btnHoverText="Create task tree"
                 btnOnClick={() => {}}
-                formState={createTaskFormState}
+                formState={taskTreeFormState}
             >
                 <div className={styles["form-content"]}>
-                    <div className={styles["create-task-btn"]}>
+                    <div className={styles["create-task-btn"]} onClick={() => {
+                        setIsTaskTreeModalOpen(false);
+                        setIsCreateTaskFormModalOpen(true);
+                    }}>
                         New Task
                     </div>
                 </div>
+            </FormModal>
+
+            <FormModal
+                isModalVisible={isCreateTaskFormModalOpen}
+                setModalVisible={(visible: boolean) => setIsCreateTaskFormModalOpen(visible)}
+                title="Create New Task"
+                btnLabel="Create"
+                btnHoverText="Create task"
+                btnOnClick={() => {}}
+                formState={createTaskFormState}
+            >
+                <AddTaskFormComponent />
             </FormModal>
                 
         </>
