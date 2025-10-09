@@ -1,0 +1,171 @@
+@use "@styles/variables" as vars;
+
+.container {
+    width: 100%;
+    // height: 100%;
+
+    .input-form {
+        
+        border-radius: vars.$border-radius-form;
+        width: 100%;
+        box-shadow: none;
+        // height: 2.25rem;
+        // min-height: 2rem;
+
+        .input-label-above{
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: vars.$grey;
+            font-size: 0.8rem;
+        }
+
+        label {
+            color: vars.$black-trans;
+            font-family: vars.$base-font-family;
+        }
+
+        fieldset {
+            border: 1px solid vars.$light-grey-border;
+            border-radius: vars.$border-radius-form;
+        }
+
+        svg {
+            color: vars.$text-black;
+        }
+
+        input {
+            font-family: vars.$base-font-family;
+            font-size: 1rem;
+            color: vars.$text-black;
+            cursor: text;
+
+            &::placeholder {
+                color: vars.$black;
+            }
+        }
+
+        &:hover fieldset {
+            border-color: vars.$light-grey-2;
+        }
+    }
+
+    .input-form-disabled{
+        border-radius: vars.$border-radius-form;
+        width: 100%;
+        box-shadow: none;
+        // height: 2.25rem;
+        // min-height: 2rem;
+
+        .input-label-above{
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: vars.$grey;
+            font-size: 0.875rem;
+        }
+
+        label {
+            color: vars.$black-trans;
+            font-family: vars.$base-font-family;
+        }
+
+        fieldset {
+            border: 1px solid vars.$light-grey-border;
+            border-radius: vars.$border-radius-form;
+        }
+
+        svg {
+            color: vars.$light-grey-4;
+        }
+
+        input {
+            font-family: vars.$base-font-family;
+            font-size: 1rem;
+            cursor: default;
+            color: vars.$light-grey-4;
+
+            &::placeholder {
+                color: vars.$grey;
+            }
+        }
+
+        &:hover fieldset {
+            border-color: vars.$light-grey-border;
+        }
+    }
+
+    .input-form-disabled-grey-label{
+        border-radius: vars.$border-radius-form;
+        width: 100%;
+        box-shadow: none;
+        // height: 2.25rem;
+        // min-height: 2rem;
+
+        .input-label-above{
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: vars.$light-grey-4;
+            font-size: 0.875rem;
+        }
+
+        label {
+            color: vars.$black-trans;
+            font-family: vars.$base-font-family;
+        }
+
+        fieldset {
+            border: 1px solid vars.$light-grey-border;
+            border-radius: vars.$border-radius-form;
+        }
+
+        svg {
+            color: vars.$light-grey-4;
+        }
+
+        input {
+            font-family: vars.$base-font-family;
+            font-size: 1rem;
+            cursor: default;
+            color: vars.$light-grey-4;
+
+            &::placeholder {
+                color: vars.$grey;
+            }
+        }
+
+        &:hover fieldset {
+            border-color: vars.$light-grey-border;
+        }
+    }
+
+    .error{
+        fieldset {
+            border: 1px solid vars.$red-light;
+        }
+
+        &:hover fieldset {
+            border-color: vars.$red;
+        }
+
+        svg {
+            color: vars.$red-light;
+        }
+
+        label {
+            color: vars.$red-light;
+        }
+
+        .input-label-above{
+            color: vars.$red-light;
+        }
+
+        input {
+            color: vars.$red-light;
+
+            &::placeholder {
+                color: vars.$red-light;
+            }
+        }
+        
+        
+    }
+}
