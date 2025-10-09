@@ -1,0 +1,30 @@
+@use "@styles/variables" as vars;
+
+.row {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    border-bottom: 1px solid vars.$light-grey-1;
+    flex-direction: row;
+
+    &:hover {
+        background-color: vars.$light-grey;
+    }
+
+    .toggle-icon {
+        margin-right: 1rem;
+        cursor: pointer;
+    }
+
+    .title {
+        flex: 1;
+        font-weight: 500;
+        font-size: 1rem;
+        color: vars.$dark-grey;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.8rem;
+
+    }
+}

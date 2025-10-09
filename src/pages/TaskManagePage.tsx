@@ -10,9 +10,10 @@ import { defaultSkillItems } from "../models/Skill";
 import { Task } from "../models/task";
 import { useGetDevelopersQuery } from "../services/developerService";
 import { useGetSkillsQuery } from "../services/skillService";
-import { useCreateTaskMutation } from "../services/taskService";
+import { useCreateTaskMutation, useGetTaskPaginationQuery } from "../services/taskService";
 import NestedTaskView from "./components/NestedTaskView";
 import styles from "./TaskManagePage.module.scss";
+import NestedTaskTable from "./components/NestedTable/NestedTaskTable";
 
 function TaskManagePage() {
 
@@ -53,6 +54,18 @@ function TaskManagePage() {
         }
     );
 
+    const {
+        data: taskData,
+    } = useGetTaskPaginationQuery(
+        {
+            page: 1,
+            pageSize: 100,
+            searchText: "",
+        },
+        {
+            refetchOnMountOrArgChange: true,
+        }
+    );
 
     const [createTask] = useCreateTaskMutation();
 
@@ -82,6 +95,9 @@ function TaskManagePage() {
                             position: "start",
                         }}
                     />
+                </div>
+                <div className={styles.content}>
+                    <NestedTaskTable taskData={taskData?.rows} />
                 </div>
             </div>
             <FormModal

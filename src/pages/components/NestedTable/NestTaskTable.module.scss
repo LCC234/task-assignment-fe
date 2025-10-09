@@ -1,0 +1,20 @@
+@use '@styles/variables' as vars;
+
+.table {
+    width: 100%;
+    border: 1px solid vars.$light-grey-border;
+    border-radius: vars.$border-radius-form;
+    height: 100%;
+    background-color: vars.$white;
+
+    .header {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid vars.$light-grey-border;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .body {
+        // padding: 1rem 2rem;
+    }
+}

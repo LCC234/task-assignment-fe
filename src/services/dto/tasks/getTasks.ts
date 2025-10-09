@@ -1,7 +1,7 @@
 import { PaginationRequest, PaginationResponse } from "../common";
 
 
-interface GetTaskApiModel {
+export interface TaskTreeMap {
     id: number;
     title: string;
     parentTaskId: number | null;
@@ -10,11 +10,11 @@ interface GetTaskApiModel {
     status: string;
     depth: number;
     requiredSkills: string[];
-    skillsIds: number[];
-    childTask: GetTaskApiModel[];
+    skillIds: number[];
+    childTask: TaskTreeMap[];
 }
 
 export interface getTasksRequest extends PaginationRequest {
 }
 
-export interface getTasksResponse extends PaginationResponse<GetTaskApiModel> { }
+export interface getTasksResponse extends PaginationResponse<TaskTreeMap> { }
