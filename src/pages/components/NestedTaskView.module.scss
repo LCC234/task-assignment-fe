@@ -41,14 +41,6 @@
             align-items: center;
             justify-content: flex-start;
             gap: 0.5rem;
-
-            .task-skill-tag {
-                // background-color: vars.$red;
-                color: vars.$white;
-                padding: 0.1rem 0.4rem;
-                font-size: .6rem;
-                border-radius: vars.$border-radius-btn;
-            }
         }
 
         .task-icons {

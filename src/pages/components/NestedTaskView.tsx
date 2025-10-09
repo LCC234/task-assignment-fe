@@ -4,6 +4,7 @@ import { Task } from '../../models/task';
 import { SkillMap } from '../../services/dto/skills/getSkills';
 import { COLORS } from '../../styles/stylings';
 import styles from './NestedTaskView.module.scss';
+import Tag from '../../components/tag/Tag';
 
 function NestedTaskView({
     taskList,
@@ -39,14 +40,12 @@ function NestedTaskView({
                                         task.skillIds.map((skillId, idx) => {
                                             if (!skillMap[skillId]) return null;
                                             return (
-                                                <div key={idx}
-                                                    className={styles["task-skill-tag"]}
-                                                    style={{
-                                                        backgroundColor: `${skillId % 2 === 0 ? COLORS.purple : COLORS.redLight}`,
-                                                     }}
-                                                >
-                                                    {skillMap[skillId]}
-                                                </div>
+                                                <>
+                                                    <Tag
+                                                        text={skillMap[skillId]}
+                                                        backgroundColor={skillId % 2 === 0 ? COLORS.purple : COLORS.redLight}
+                                                    />
+                                                </>
                                             );
                                         })
                                     }
