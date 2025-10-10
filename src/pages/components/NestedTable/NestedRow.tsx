@@ -10,9 +10,11 @@ import { IoIosArrowDown } from "react-icons/io";
 function NestedRow({
     rowData,
     developerData,
+    onAssigneeChange,
 }: {
     rowData: TaskTreeMap;
     developerData: Developer[];
+    onAssigneeChange: (developerId: number, taskId: number) => void;
 }) {
     // console.log("Row Data:", rowData);
     // console.log("Developer Data:", developerData);
@@ -35,10 +37,12 @@ function NestedRow({
                     value={rowData.assignedDeveloperId ? rowData.assignedDeveloperId.toString() : ""}
                     onChange={(event) => {
                         console.log(event.target.value);
-                        rowData.assignedDeveloperId = Number(event.target.value);
+                        // rowData.assignedDeveloperId = Number(event.target.value);
+                        onAssigneeChange(Number(event.target.value), rowData.id);
                     }}
                     styleType={FormFieldStyle.BASIC_NO_LABEL}
                     state={FormFieldState.ENABLE}
+                    className={styles["assignee-dropdown"]}
                 />
             </div>
         </div>

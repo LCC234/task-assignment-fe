@@ -4,6 +4,7 @@ import { getTasksResponse, TaskTreeMap } from "../../../services/dto/tasks/getTa
 import NestedRow from "./NestedRow";
 import styles from "./NestTaskTable.module.scss";
 import { convertDevelopersToMap, filterDevelopersBySkills } from "../../../models/developer";
+import { usePostAssignTaskMutation } from "../../../services/taskService";
 
 
 function NestedTaskTable({
@@ -12,7 +13,6 @@ function NestedTaskTable({
     taskData: TaskTreeMap[] | undefined;
 }) {
 
-    const [selectedTaskSkillIds, setSelectedTaskSkillIds] = useState<number[]>([]);
 
     const {
         data: developerData,
@@ -25,6 +25,7 @@ function NestedTaskTable({
         }
     );
 
+    const [postAssignTask] = usePostAssignTaskMutation();
 
     return (
         <div className={styles.table}>
@@ -37,6 +38,15 @@ function NestedTaskTable({
                         key={task.id}
                         rowData={task}
                         developerData={developerData ? developerData : []}
+                        onAssigneeChange={async (developerId, taskId) => {
+                            try {
+                                await postAssignTask({ taskId, developerId }).unwrap();
+
+                            }
+                            catch (err) {
+                                console.error("Failed to assign task:", err);
+                            }
+                        }}
                     />
                 ))}
             </div>

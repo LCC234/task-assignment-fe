@@ -1,10 +1,11 @@
 import { request } from "http";
 import { Task } from "../models/task";
-import { TASKS_API } from "../utils/constants/ApiSubPath";
+import { TASKS_API, TASKS_ASSIGN_API } from "../utils/constants/ApiSubPath";
 import { TASK_SERVICE_TAG } from "../utils/constants/ServiceTags";
 import { baseApi } from "./base";
 import { getTasksResponse, getTasksRequest } from "./dto/tasks/getTasks";
 import { PostTaskRequest, PostTaskResponse, postTaskAdapter } from "./dto/tasks/postTask";
+import { PostAssignTaskResponse, PostAssignTaskRequest } from "./dto/tasks/postAssignTask";
 
 
 
@@ -36,10 +37,19 @@ const taskServiceApi = baseApi.injectEndpoints({
             },
             providesTags: [TASK_SERVICE_TAG],
         }),
+        postAssignTask: build.mutation<PostAssignTaskResponse, PostAssignTaskRequest>({
+            query: (request) => ({
+                url: TASKS_ASSIGN_API,
+                method: "POST",
+                data: request,
+            }),
+            invalidatesTags: [TASK_SERVICE_TAG],
+        }),
     }),
 });
 
 export const {
     useCreateTaskMutation,
     useGetTaskPaginationQuery,
+    usePostAssignTaskMutation,
 } = taskServiceApi;

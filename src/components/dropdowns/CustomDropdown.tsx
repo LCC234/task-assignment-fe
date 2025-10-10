@@ -21,6 +21,7 @@ function CustomDropdown({
     customDropdownRef,
     onKeyDown,
     multiple = false,
+    className = "",
 }: {
     value: string | string[];
     onChange: (event: SelectChangeEvent) => void;
@@ -33,6 +34,7 @@ function CustomDropdown({
     customDropdownRef?: React.Ref<HTMLInputElement>;
     onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     multiple?: boolean;
+    className?: string;
 }) {
     return (
         <div className={styles.container}>
@@ -97,7 +99,7 @@ function CustomDropdown({
                 }}
                 variant="outlined"
                 className={
-                    `${state == FormFieldState.DISABLE
+                    `${className} ${state == FormFieldState.DISABLE
                         ? styles["dropdown-disabled"]
                         : state == FormFieldState.DISABLE_GREY_LABEL
                         ? styles["dropdown-disabled-grey-label"]
