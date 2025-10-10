@@ -3,7 +3,7 @@
 .row {
     display: flex;
     align-items: center;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 0rem 0.8rem 2rem;
     border-bottom: 1px solid vars.$light-grey-1;
     flex-direction: row;
 
@@ -29,6 +29,13 @@
     }
 
     .assignee {
-        min-width: 10rem;
+        min-width: 14rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .assignee-dropdown{
+            width: 10rem;
+        }
     }
 }

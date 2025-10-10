@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { useGetDevelopersQuery } from "../../../services/developerService";
-import { getTasksResponse, TaskTreeMap } from "../../../services/dto/tasks/getTasks";
+import { TaskTreeMap } from "../../../services/dto/tasks/getTasks";
+import { usePostAssignTaskMutation } from "../../../services/taskService";
 import NestedRow from "./NestedRow";
 import styles from "./NestTaskTable.module.scss";
-import { convertDevelopersToMap, filterDevelopersBySkills } from "../../../models/developer";
-import { usePostAssignTaskMutation } from "../../../services/taskService";
 
 
 function NestedTaskTable({
@@ -31,6 +29,7 @@ function NestedTaskTable({
         <div className={styles.table}>
             <div className={styles.header}>
                 Task Tree
+                <div className={styles["header-assignee-title"]}>Assignee</div>
             </div>
             <div className={styles.body}>
                 {taskData?.map((task) => (
