@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import CustomDropdown from "../../../components/dropdowns/CustomDropdown";
 import { FormFieldStyle, FormFieldState } from "../../../components/input/Input";
 import Tag from "../../../components/tag/Tag";
@@ -19,8 +20,9 @@ function NestedRow({
     onAssigneeChange: (developerId: number, taskId: number) => void;
     onStatusChange: (status: TaskStatus, taskId: number) => void;
 }) {
-    // console.log("Row Data:", rowData);
-    // console.log("Developer Data:", developerData);
+    const hasChildren = useRef(rowData.childTasks && rowData.childTasks.length > 0);
+
+
     return (
         <div className={styles["group-row"]}>
             <div className={styles.row}>
@@ -78,7 +80,7 @@ function NestedRow({
                     </div>
                 </div>
             </div>
-            {rowData.childTasks && rowData.childTasks.length > 0 && (
+            {hasChildren.current && (
                 rowData.childTasks.map((child) => (
                     <NestedRow
                         key={child.id}
