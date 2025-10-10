@@ -24,17 +24,7 @@ function TaskManagePage() {
     const [createTaskFormData, setCreateTaskFormData] = useState<AddTaskForm>(defaultAddTaskForm)
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
 
-    const [newTaskList, setNewTaskList] = useState<Task[]>([
-        // {
-        //     title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 0, id: 0
-        // },
-        // {
-        //     title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 1, id: 1
-        // },
-        // {
-        //     title: 'Gaming', parentTaskId: null, assignedDeveloperId: null, status: 'To-Do', skillIds: [1], depth: 2, id: 1
-        // },
-    ]);
+    const [newTaskList, setNewTaskList] = useState<Task[]>([]);
 
     const {
         data: skillData

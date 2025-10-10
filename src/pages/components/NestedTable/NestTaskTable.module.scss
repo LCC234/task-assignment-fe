@@ -6,6 +6,7 @@
     border-radius: vars.$border-radius-form;
     height: 100%;
     background-color: vars.$white;
+    overflow: hidden;
 
     .header {
         padding: 1rem 0rem 1rem 2rem;
@@ -40,6 +41,7 @@
     }
 
     .body {
-        // padding: 1rem 2rem;
+        height: calc(100% - 4rem);
+        overflow-y: scroll;
     }
 }
