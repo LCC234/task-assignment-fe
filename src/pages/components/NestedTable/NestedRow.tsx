@@ -26,7 +26,13 @@ function NestedRow({
             <div className={styles.row}>
                 <div className={styles.indent} style={{ width: `${rowData.depth * 1}rem` }} />
                 <IoIosArrowDown className={styles["toggle-icon"]} />
-                <div className={styles.title}>
+                <div
+                    className={styles.title}
+                    style={{
+                        fontSize: `${rowData.depth < 5 ? 1 - rowData.depth * 0.1 : 0.5}rem`,
+                        fontWeight: `${rowData.depth > 1 ? 400 : 500}`,
+                    }}
+                >
                     {rowData.title}
 
                 </div>
