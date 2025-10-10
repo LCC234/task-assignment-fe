@@ -28,14 +28,29 @@
 
     }
 
-    .assignee {
-        min-width: 14rem;
+    .row-right {
         display: flex;
-        align-items: center;
-        justify-content: center;
 
-        .assignee-dropdown{
-            width: 10rem;
+        .status {
+            min-width: 12rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .assignee-status {
+                width: 8rem;
+            }
+        }
+
+        .assignee {
+            min-width: 14rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .assignee-dropdown {
+                width: 10rem;
+            }
         }
     }
 }

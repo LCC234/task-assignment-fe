@@ -16,12 +16,21 @@
         align-items: center;
         justify-content: space-between;
 
-        .header-assignee-title{
-            // align-self: flex-end;
-            width: 14rem;
-            text-align: center;
-            border-left: 1px solid vars.$light-grey-border;
-            // background-color: red;
+        .header-right {
+            display: flex;
+
+
+            .header-assignee-title {
+                width: 14rem;
+                text-align: center;
+                border-left: 1px solid vars.$light-grey-border;
+            }
+
+            .header-status-title {
+                width: 12rem;
+                text-align: center;
+                border-left: 1px solid vars.$light-grey-border;
+            }
         }
     }
 

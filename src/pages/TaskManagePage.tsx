@@ -96,7 +96,9 @@ function TaskManagePage() {
                     />
                 </div>
                 <div className={styles.content}>
-                    <NestedTaskTable taskData={taskData?.rows} />
+                    <NestedTaskTable
+                        taskData={taskData?.rows}
+                    />
                 </div>
             </div>
             <FormModal
@@ -105,13 +107,13 @@ function TaskManagePage() {
                 title="Create New Task Tree"
                 btnLabel="Done"
                 btnHoverText="Create task tree"
-                btnOnClick={() => { 
-                    setIsTaskTreeModalOpen(false); 
+                btnOnClick={() => {
+                    setIsTaskTreeModalOpen(false);
                     // setNewTaskList([]);
                     // setTaskTreeFormState(FormState.DEFAULT);
                 }}
-                onClose={() => { 
-                    setIsTaskTreeModalOpen(false); 
+                onClose={() => {
+                    setIsTaskTreeModalOpen(false);
                     // setNewTaskList([]);
                     // setTaskTreeFormState(FormState.DEFAULT);
                 }}

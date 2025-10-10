@@ -6,7 +6,7 @@ import styles from "./NestTaskTable.module.scss";
 
 
 function NestedTaskTable({
-    taskData
+    taskData,
 }: {
     taskData: TaskTreeMap[] | undefined;
 }) {
@@ -29,7 +29,11 @@ function NestedTaskTable({
         <div className={styles.table}>
             <div className={styles.header}>
                 Task Tree
-                <div className={styles["header-assignee-title"]}>Assignee</div>
+                <div className={styles["header-right"]}>
+                    <div className={styles["header-status-title"]}>Status</div>
+                    <div className={styles["header-assignee-title"]}>Assignee</div>
+                    
+                </div>
             </div>
             <div className={styles.body}>
                 {taskData?.map((task) => (

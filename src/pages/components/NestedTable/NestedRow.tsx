@@ -2,6 +2,7 @@ import CustomDropdown from "../../../components/dropdowns/CustomDropdown";
 import { FormFieldStyle, FormFieldState } from "../../../components/input/Input";
 import Tag from "../../../components/tag/Tag";
 import { convertDevelopersToMap, Developer, filterDevelopersBySkills } from "../../../models/developer";
+import { TaskStatus, TaskStatusDisplay } from "../../../models/TaskStatus";
 import { TaskTreeMap } from "../../../services/dto/tasks/getTasks";
 import { COLORS } from "../../../styles/stylings";
 import styles from "./NestedRow.module.scss";
@@ -30,20 +31,37 @@ function NestedRow({
                     ))
                 )}
             </div>
-            <div className={styles.assignee}>
-                <CustomDropdown
-                    label={""}
-                    items={convertDevelopersToMap(filterDevelopersBySkills(developerData, rowData.skillIds))}
-                    value={rowData.assignedDeveloperId ? rowData.assignedDeveloperId.toString() : ""}
-                    onChange={(event) => {
-                        console.log(event.target.value);
-                        // rowData.assignedDeveloperId = Number(event.target.value);
-                        onAssigneeChange(Number(event.target.value), rowData.id);
-                    }}
-                    styleType={FormFieldStyle.BASIC_NO_LABEL}
-                    state={FormFieldState.ENABLE}
-                    className={styles["assignee-dropdown"]}
-                />
+            <div className={styles["row-right"]}>
+
+                <div className={styles.status}>
+                    <CustomDropdown
+                        label={""}
+                        items={TaskStatusDisplay}
+                        value={rowData.status}
+                        onChange={(event) => {
+                            console.log(event.target.value);
+                        }}
+                        styleType={FormFieldStyle.BASIC_NO_LABEL}
+                        state={FormFieldState.ENABLE}
+                        className={styles["assignee-status"]}
+                    />
+                </div>
+
+                <div className={styles.assignee}>
+                    <CustomDropdown
+                        label={""}
+                        items={convertDevelopersToMap(filterDevelopersBySkills(developerData, rowData.skillIds))}
+                        value={rowData.assignedDeveloperId ? rowData.assignedDeveloperId.toString() : ""}
+                        onChange={(event) => {
+                            console.log(event.target.value);
+                            // rowData.assignedDeveloperId = Number(event.target.value);
+                            onAssigneeChange(Number(event.target.value), rowData.id);
+                        }}
+                        styleType={FormFieldStyle.BASIC_NO_LABEL}
+                        state={FormFieldState.ENABLE}
+                        className={styles["assignee-dropdown"]}
+                    />
+                </div>
             </div>
         </div>
     );

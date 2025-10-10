@@ -3,7 +3,7 @@ import { Task } from "../models/task";
 import { TASKS_API, TASKS_ASSIGN_API } from "../utils/constants/ApiSubPath";
 import { TASK_SERVICE_TAG } from "../utils/constants/ServiceTags";
 import { baseApi } from "./base";
-import { getTasksResponse, getTasksRequest } from "./dto/tasks/getTasks";
+import { getTasksResponse, getTasksRequest, TaskPagination, getTasksAdapter } from "./dto/tasks/getTasks";
 import { PostTaskRequest, PostTaskResponse, postTaskAdapter } from "./dto/tasks/postTask";
 import { PostAssignTaskResponse, PostAssignTaskRequest } from "./dto/tasks/postAssignTask";
 
@@ -22,7 +22,7 @@ const taskServiceApi = baseApi.injectEndpoints({
             },
             invalidatesTags: [TASK_SERVICE_TAG],
         }),
-        getTaskPagination: build.query<getTasksResponse, getTasksRequest>({
+        getTaskPagination: build.query<TaskPagination, getTasksRequest>({
             query: (request) => {
                 const searchParams = new URLSearchParams();
                 Object.entries(request).forEach(([key, value]) => {
@@ -34,6 +34,9 @@ const taskServiceApi = baseApi.injectEndpoints({
                     url: `${TASKS_API}?${searchParams.toString()}`,
                     method: "GET",
                 };
+            },
+            transformResponse: (response: getTasksResponse) => {
+                return getTasksAdapter(response);
             },
             providesTags: [TASK_SERVICE_TAG],
         }),
