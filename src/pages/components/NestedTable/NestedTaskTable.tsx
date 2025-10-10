@@ -1,6 +1,6 @@
 import { useGetDevelopersQuery } from "../../../services/developerService";
 import { TaskTreeMap } from "../../../services/dto/tasks/getTasks";
-import { usePostAssignTaskMutation } from "../../../services/taskService";
+import { usePostAssignTaskMutation, usePostUpdateTaskStatusMutation } from "../../../services/taskService";
 import NestedRow from "./NestedRow";
 import styles from "./NestTaskTable.module.scss";
 
@@ -24,6 +24,7 @@ function NestedTaskTable({
     );
 
     const [postAssignTask] = usePostAssignTaskMutation();
+    const [postUpdateTaskStatus] = usePostUpdateTaskStatusMutation();
 
     return (
         <div className={styles.table}>
@@ -48,6 +49,14 @@ function NestedTaskTable({
                             }
                             catch (err) {
                                 console.error("Failed to assign task:", err);
+                            }
+                        }}
+                        onStatusChange={async (status, taskId) => {
+                            try {
+                                await postUpdateTaskStatus({ taskId, status }).unwrap();
+                            }
+                            catch (err) {
+                                console.error("Failed to update task status:", err);
                             }
                         }}
                     />

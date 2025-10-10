@@ -66,4 +66,5 @@ export const {
     useCreateTaskMutation,
     useGetTaskPaginationQuery,
     usePostAssignTaskMutation,
+    usePostUpdateTaskStatusMutation,
 } = taskServiceApi;
