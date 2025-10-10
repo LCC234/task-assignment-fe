@@ -19,6 +19,11 @@
         .header-right {
             display: flex;
 
+            .header-skill-title {
+                width: 10rem;
+                text-align: center;
+                border-left: 1px solid vars.$light-grey-border;
+            }
 
             .header-assignee-title {
                 width: 14rem;

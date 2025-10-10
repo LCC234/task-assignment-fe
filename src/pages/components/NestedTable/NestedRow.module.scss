@@ -31,6 +31,18 @@
     .row-right {
         display: flex;
 
+        .skill {
+            width: 10rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: vars.$dark-grey;
+        }
+
         .status {
             min-width: 12rem;
             display: flex;

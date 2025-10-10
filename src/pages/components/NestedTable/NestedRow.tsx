@@ -27,13 +27,17 @@ function NestedRow({
             <IoIosArrowDown className={styles["toggle-icon"]} />
             <div className={styles.title}>
                 {rowData.title}
-                {rowData.requiredSkills && rowData.requiredSkills.length > 0 && (
-                    rowData.requiredSkills.map((skill, ind) => (
-                        <Tag key={skill} text={skill} backgroundColor={rowData.skillIds[ind] % 2 === 0 ? COLORS.purple : COLORS.redLight} />
-                    ))
-                )}
+
             </div>
             <div className={styles["row-right"]}>
+
+                <div className={styles.skill}>
+                    {rowData.requiredSkills && rowData.requiredSkills.length > 0 && (
+                        rowData.requiredSkills.map((skill, ind) => (
+                            <Tag key={skill} text={skill} backgroundColor={rowData.skillIds[ind] % 2 === 0 ? COLORS.purple : COLORS.redLight} />
+                        ))
+                    )}
+                </div>
 
                 <div className={styles.status}>
                     <CustomDropdown
