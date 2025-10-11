@@ -30,7 +30,7 @@ A web application for managing tasks with hierarchical relationships, built with
 
  ### Setup and Run With Docker
 1. Ensure you have Docker and Docker Compose installed on your machine.
-2. Be sure to have the backend API and database containers running. You can refer to the [backend repository](https://github.com/LCC234/task-assignment-be) for instructions
+2. Be sure to have the backend API and database containers running first. You can refer to the [backend repository](https://github.com/LCC234/task-assignment-be) for instructions
 3. Clone the repository:
    ```bash
    git clone
