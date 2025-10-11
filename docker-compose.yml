@@ -10,9 +10,9 @@ services:
     env_file:
       - ./.env
     networks:
-      - task_assignment_network
+      - task-assignment-network
 
 networks:
-  task_assignment_network:
+  task-assignment-network:
     external: true
-    name: task_assignment_network
+    name: task-assignment-network
