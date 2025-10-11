@@ -52,9 +52,6 @@ function NestedTaskTable({
                                 </div>
                             ))
                         }
-                        <div className={styles["legend-item"]}>
-
-                        </div>
                     </div>
                 </div>
                 <div className={styles["header-right"]}>
