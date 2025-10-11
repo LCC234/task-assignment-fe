@@ -17,8 +17,8 @@ function NestedTaskView({
 }: {
     taskList: Task[];
     onEmptyClick: () => void;
-    onAddClick: (depth: number, parentTaskId?: number | null) => void;
-    onAddChildClick: (depth: number, taskId?: number | null) => void;
+    onAddClick: (depth: number, parentTaskId: number | null, parentTaskTitle: string | null) => void;
+    onAddChildClick: (depth: number, taskId: number | null, parentTaskTitle: string | null) => void;
     onDeleteClick: () => void;
     onEditClick: (task: Task) => void;
     skillMap: SkillMap;
@@ -54,15 +54,15 @@ function NestedTaskView({
                                     {
                                         task.depth > 0 && (
                                             <IoAdd
-                                                onClick={() => onAddClick(task.depth, task.parentTaskId)}
+                                                onClick={() => onAddClick(task.depth, task.parentTaskId, task.parentTaskTitle)}
                                                 title='Add Sibling Task'
                                             />
                                         )
                                     }
                                     {
-                                        task.depth > 2 && (
+                                        task.depth < 3 && (
                                             <TiFlowChildren
-                                                onClick={() => onAddChildClick(task.depth, task.id)}
+                                                onClick={() => onAddChildClick(task.depth, task.id, task.title)}
                                                 title='Add Sub-task'
                                             />
                                         )

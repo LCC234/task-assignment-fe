@@ -25,6 +25,7 @@ function TaskManagePage() {
     const [isCreateTaskFormModalOpen, setIsCreateTaskFormModalOpen] = useState(false);
     const [createTaskFormData, setCreateTaskFormData] = useState<AddTaskForm>(defaultAddTaskForm)
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
+    const [parentTaskTitle, setParentTaskTitle] = useState<string>("");
 
     const [newTaskList, setNewTaskList] = useState<Task[]>([]);
 
@@ -117,15 +118,18 @@ function TaskManagePage() {
                             setIsTaskTreeModalOpen(false);
                             setIsCreateTaskFormModalOpen(true);
                         }}
-                        onAddClick={(depth: number, parentTaskId?: number | null) => {
+                        onAddClick={(depth: number, parentTaskId: number | null, parentTaskTitle: string | null) => {
                             setCreateTaskFormData(defaultAddTaskForm(depth, parentTaskId));
                             setIsTaskTreeModalOpen(false);
                             setIsCreateTaskFormModalOpen(true);
+                            setParentTaskTitle(parentTaskTitle ? parentTaskTitle : "");
                         }}
-                        onAddChildClick={(depth: number, taskId?: number | null) => {
+                        onAddChildClick={(depth: number, taskId: number | null, parentTaskTitle: string | null) => {
+                            console.log("depth, taskId, parentTaskTitle", depth, taskId, parentTaskTitle);
                             setCreateTaskFormData(defaultAddTaskForm(depth + 1, taskId));
                             setIsTaskTreeModalOpen(false);
                             setIsCreateTaskFormModalOpen(true);
+                            setParentTaskTitle(parentTaskTitle ? parentTaskTitle : "");
                         }}
                         onDeleteClick={() => { }}
                         onEditClick={(task: Task) => {
@@ -200,6 +204,7 @@ function TaskManagePage() {
                     setFormData={setCreateTaskFormData}
                     skillsItems={skillData ? skillData : defaultSkillItems}
                     developerItems={convertDevelopersToMap(developerData ? developerData : [])}
+                    parentTaskTitle={parentTaskTitle}
                 />
             </FormModal>
 

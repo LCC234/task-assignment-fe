@@ -8,18 +8,25 @@ function AddTaskFormComponent({
     formData,
     setFormData,
     skillsItems,
-    developerItems
+    developerItems,
+    parentTaskTitle,
 }: {
     formData: AddTaskForm;
     setFormData: (data: AddTaskForm) => void;
     skillsItems: { [key: number]: string };
     developerItems: { [key: string]: string };
+    parentTaskTitle?: string;
 }) {
-
-
 
     return (
         <div className={styles.container}>
+            <div className={styles["parent-task-title"]}>
+                {parentTaskTitle && formData.depth > 0 && (
+                    <>
+                        Parent Task - <span className={styles["parent-task-title"]}>{parentTaskTitle}</span>
+                    </>
+                )}
+            </div>
             <TextInput
                 label="Title"
                 value={formData.title}

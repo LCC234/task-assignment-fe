@@ -20,6 +20,10 @@ export interface PostTaskResponse {
         skill_id: number;
         task_id: number;
     }[];
+    tasks: {
+        id: number;
+        title: string;
+    } | null;
 }
 
 export const postTaskAdapter = (response: PostTaskResponse): Task => {
@@ -31,5 +35,6 @@ export const postTaskAdapter = (response: PostTaskResponse): Task => {
         status: response.status,
         skillIds: response.task_skills.map(skill => skill.skill_id),
         depth: response.depth,
+        parentTaskTitle: response.tasks ? response.tasks.title : null
     };
 };
