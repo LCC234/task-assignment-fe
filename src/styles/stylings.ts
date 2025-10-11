@@ -13,6 +13,7 @@ export const COLORS = {
     lightGrey2: '#c0c0c0',
     green: '#51946f',
     blue: '#3d78b6',
+    orange: '#FF8300',
 };
 
 export const BORDERS = {
