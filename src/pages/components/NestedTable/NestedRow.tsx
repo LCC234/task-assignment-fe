@@ -8,7 +8,7 @@ import { TaskTreeMap } from "../../../services/dto/tasks/getTasks";
 import { COLORS } from "../../../styles/stylings";
 import styles from "./NestedRow.module.scss";
 import { useEffect, useRef, useState } from "react";
-import  CircleIcon from "../../../assets/images/circle.svg?react";
+import CircleIcon from "../../../assets/images/circle.svg?react";
 import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -66,9 +66,9 @@ function NestedRow({
                 }
 
                 <div
-                    className={styles.title}
+                    className={styles["container-title"]}
                     style={{
-                        fontSize: `${rowData.depth > 1 ? 0.85 :  1}rem`,
+                        fontSize: `${rowData.depth > 1 ? 0.85 : 1}rem`,
                         fontWeight: `${rowData.depth > 1 ? 400 : 500}`,
                     }}
                 >
@@ -81,7 +81,9 @@ function NestedRow({
                             <FaCheckCircle className={`${styles["icon-status"]} ${styles["status-completed"]}`} />
                         )
                     }
-                    {rowData.title}
+                    <div className={styles.title}>
+                        {rowData.title}
+                    </div>
 
                 </div>
                 <div className={styles["row-right"]}>

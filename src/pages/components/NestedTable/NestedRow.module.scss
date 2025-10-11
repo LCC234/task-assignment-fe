@@ -25,7 +25,7 @@
             }
         }
 
-        .title {
+        .container-title {
             flex: 1;
             font-weight: 500;
             font-size: 1rem;
@@ -53,6 +53,10 @@
                 &.status-completed {
                     color: vars.$green;
                 }
+            }
+
+            .title{
+                flex: 1;
             }
         }
 
