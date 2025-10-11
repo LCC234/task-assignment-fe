@@ -9,7 +9,10 @@ export const COLORS = {
     purple: purple[500],
     backdropColor: '#00000033',
     redLight: "#fc6161",
+    lightGrey3: '#acacac',
     lightGrey2: '#c0c0c0',
+    green: '#51946f',
+    blue: '#3d78b6',
 };
 
 export const BORDERS = {

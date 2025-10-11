@@ -1,3 +1,7 @@
+import { FaCheckCircle } from "react-icons/fa";
+import { MdOutlineAccessTimeFilled } from "react-icons/md";
+import CircleIcon from "../../../assets/images/circle.svg?react";
+import { TaskStatus, TaskStatusDisplay } from "../../../models/TaskStatus";
 import { useGetDevelopersQuery } from "../../../services/developerService";
 import { TaskTreeMap } from "../../../services/dto/tasks/getTasks";
 import { usePostAssignTaskMutation, usePostUpdateTaskStatusMutation } from "../../../services/taskService";
@@ -31,6 +35,25 @@ function NestedTaskTable({
             <div className={styles.header}>
                 <div className={styles["header-left"]}>
                     <div className={styles["header-task-title"]}>Task</div>
+                    <div className={styles["legend"]}>
+                        {
+                            Object.values(TaskStatus).map((status: string) => (
+                                <div key={status} className={styles["legend-item"]}>
+                                    {status === TaskStatus.ToDo ? (
+                                        <CircleIcon className={`${styles["icon-status"]} ${styles["status-to-do"]}`} />
+                                    ) : status === TaskStatus.InProgress ? (
+                                        <MdOutlineAccessTimeFilled className={`${styles["icon-status"]} ${styles["status-in-progress"]}`} />
+                                    ) : (
+                                        <FaCheckCircle className={`${styles["icon-status"]} ${styles["status-completed"]}`} />
+                                    )}
+                                    <div className={styles["legend-label"]}>{TaskStatusDisplay[status]}</div>
+                                </div>
+                            ))
+                        }
+                        <div className={styles["legend-item"]}>
+
+                        </div>
+                    </div>
                 </div>
                 <div className={styles["header-right"]}>
                     <div className={styles["header-skill-title"]}>Skills</div>
