@@ -14,6 +14,8 @@ import { useCreateTaskMutation, useGetTaskPaginationQuery } from "../services/ta
 import NestedTaskView from "./components/NestedTaskView";
 import styles from "./TaskManagePage.module.scss";
 import NestedTaskTable from "./components/NestedTable/NestedTaskTable";
+import { useSnackbar } from "notistack";
+import { getTruncatedTitle } from "../utils/string";
 
 function TaskManagePage() {
 
@@ -25,6 +27,8 @@ function TaskManagePage() {
     const [createTaskFormState, setCreateTaskFormState] = useState<FormState>(FormState.DEFAULT);
 
     const [newTaskList, setNewTaskList] = useState<Task[]>([]);
+
+    const { enqueueSnackbar } = useSnackbar();
 
     const {
         data: skillData
@@ -57,10 +61,6 @@ function TaskManagePage() {
     );
 
     const [createTask] = useCreateTaskMutation();
-
-    useEffect(() => {
-        console.log("newTaskList updated:", newTaskList, createTaskFormState);
-    }, [newTaskList, createTaskFormState]);
 
     return (
         <>
@@ -176,7 +176,9 @@ function TaskManagePage() {
                         } else {
                             setNewTaskList([...newTaskList, createdTask]);
                         }
-                        // setNewTaskList([...newTaskList, createdTask]);
+
+                        enqueueSnackbar(`${createTaskFormData.depth > 0 ? "Sub-task" : "Root task"} "${getTruncatedTitle(createdTask.title)}" created successfully!`, { variant: 'success' });
+
                         setCreateTaskFormData(defaultAddTaskForm());
                         setCreateTaskFormState(FormState.DEFAULT);
                         setIsCreateTaskFormModalOpen(false);
@@ -184,6 +186,7 @@ function TaskManagePage() {
                     } catch (error) {
                         console.error("Error creating task:", error);
                         setCreateTaskFormState(FormState.ERROR);
+                        enqueueSnackbar(`Failed to create ${createTaskFormData.depth > 0 ? "sub-task" : "root task"} "${getTruncatedTitle(createTaskFormData.title)}". Please try again.`, { variant: 'error' });
                     }
                     // setNewTaskList([...newTaskList, taskForm]);
 

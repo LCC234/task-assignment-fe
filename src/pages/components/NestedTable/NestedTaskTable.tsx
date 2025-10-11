@@ -7,6 +7,8 @@ import { TaskTreeMap } from "../../../services/dto/tasks/getTasks";
 import { usePostAssignTaskMutation, usePostUpdateTaskStatusMutation } from "../../../services/taskService";
 import NestedRow from "./NestedRow";
 import styles from "./NestTaskTable.module.scss";
+import { useSnackbar } from "notistack";
+import { getTruncatedTitle } from "../../../utils/string";
 
 
 function NestedTaskTable({
@@ -15,7 +17,7 @@ function NestedTaskTable({
     taskData: TaskTreeMap[] | undefined;
 }) {
 
-
+    const { enqueueSnackbar } = useSnackbar();
     const {
         data: developerData,
     } = useGetDevelopersQuery(
@@ -70,18 +72,22 @@ function NestedTaskTable({
                         onAssigneeChange={async (developerId, taskId) => {
                             try {
                                 await postAssignTask({ taskId, developerId }).unwrap();
-
+                                const developerName = developerData?.find(dev => Number(dev.id) === developerId)?.name;
+                                enqueueSnackbar(`Task "${getTruncatedTitle(task.title)}" assigned${developerName ? ` to ${developerName}` : ""} successfully!`, { variant: 'success' });
                             }
                             catch (err) {
                                 console.error("Failed to assign task:", err);
+                                enqueueSnackbar(`Failed to assign task "${getTruncatedTitle(task.title)}". Please try again.`, { variant: 'error' });
                             }
                         }}
                         onStatusChange={async (status, taskId) => {
                             try {
                                 await postUpdateTaskStatus({ taskId, status }).unwrap();
+                                enqueueSnackbar(`Task "${getTruncatedTitle(task.title)}" marked as ${TaskStatusDisplay[status]} successfully!`, { variant: 'success' });
                             }
                             catch (err) {
                                 console.error("Failed to update task status:", err);
+                                enqueueSnackbar(`Failed to update task "${getTruncatedTitle(task.title)}" status. Please try again.`, { variant: 'error' });
                             }
                         }}
                     />
