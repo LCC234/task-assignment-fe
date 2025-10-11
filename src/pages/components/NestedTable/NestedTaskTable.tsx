@@ -34,7 +34,7 @@ function NestedTaskTable({
         <div className={styles.table}>
             <div className={styles.header}>
                 <div className={styles["header-left"]}>
-                    <div className={styles["header-task-title"]}>Task</div>
+                    <div className={styles["header-task-title"]}>Tasks</div>
                     <div className={styles["legend"]}>
                         {
                             Object.values(TaskStatus).map((status: string) => (

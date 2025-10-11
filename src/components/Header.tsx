@@ -8,7 +8,7 @@ function Header() {
             <div className={styles["left-container"]}>
                 <PiProjectorScreenChartFill  className={styles["logo"]} size={"1.6rem"}/>
                 <span className={styles["title"]}>
-                    Project Tracker Portal
+                    Project Tracker
                 </span>
             </div>
 
