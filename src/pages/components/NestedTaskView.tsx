@@ -59,10 +59,14 @@ function NestedTaskView({
                                             />
                                         )
                                     }
-                                    <TiFlowChildren
-                                        onClick={() => onAddChildClick(task.depth, task.id)}
-                                        title='Add Sub-task'
-                                    />
+                                    {
+                                        task.depth > 2 && (
+                                            <TiFlowChildren
+                                                onClick={() => onAddChildClick(task.depth, task.id)}
+                                                title='Add Sub-task'
+                                            />
+                                        )
+                                    }
                                     {/* <MdDelete
                                         onClick={onDeleteClick}
                                     /> */}
