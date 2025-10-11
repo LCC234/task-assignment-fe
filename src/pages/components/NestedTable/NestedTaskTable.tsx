@@ -63,34 +63,37 @@ function NestedTaskTable({
             <div className={styles.body}>
                 {
                     (taskData && taskData.length > 0) ? (
-                        taskData.map((task) => (
-                            <NestedRow
-                                key={task.id}
-                                rowData={task}
-                                developerData={developerData ? developerData : []}
-                                onAssigneeChange={async (developerId, taskId) => {
-                                    try {
-                                        await postAssignTask({ taskId, developerId }).unwrap();
-                                        const developerName = developerData?.find(dev => Number(dev.id) === developerId)?.name;
-                                        enqueueSnackbar(`Task "${getTruncatedTitle(task.title)}" assigned${developerName ? ` to ${developerName}` : ""} successfully!`, { variant: 'success' });
-                                    }
-                                    catch (err) {
-                                        console.error("Failed to assign task:", err);
-                                        enqueueSnackbar(`Failed to assign task "${getTruncatedTitle(task.title)}". Please try again.`, { variant: 'error' });
-                                    }
-                                }}
-                                onStatusChange={async (status, taskId) => {
-                                    try {
-                                        await postUpdateTaskStatus({ taskId, status }).unwrap();
-                                        enqueueSnackbar(`Task "${getTruncatedTitle(task.title)}" marked as ${TaskStatusDisplay[status]} successfully!`, { variant: 'success' });
-                                    }
-                                    catch (err) {
-                                        console.error("Failed to update task status:", err);
-                                        enqueueSnackbar(`Failed to update task "${getTruncatedTitle(task.title)}" status. Please try again.`, { variant: 'error' });
-                                    }
-                                }}
-                            />
-                        ))
+                        <>
+                            {taskData.map((task) => (
+                                <NestedRow
+                                    key={task.id}
+                                    rowData={task}
+                                    developerData={developerData ? developerData : []}
+                                    onAssigneeChange={async (developerId, taskId) => {
+                                        try {
+                                            await postAssignTask({ taskId, developerId }).unwrap();
+                                            const developerName = developerData?.find(dev => Number(dev.id) === developerId)?.name;
+                                            enqueueSnackbar(`Task "${getTruncatedTitle(task.title)}" assigned${developerName ? ` to ${developerName}` : ""} successfully!`, { variant: 'success' });
+                                        }
+                                        catch (err) {
+                                            console.error("Failed to assign task:", err);
+                                            enqueueSnackbar(`Failed to assign task "${getTruncatedTitle(task.title)}". Please try again.`, { variant: 'error' });
+                                        }
+                                    }}
+                                    onStatusChange={async (status, taskId) => {
+                                        try {
+                                            await postUpdateTaskStatus({ taskId, status }).unwrap();
+                                            enqueueSnackbar(`Task "${getTruncatedTitle(task.title)}" marked as ${TaskStatusDisplay[status]} successfully!`, { variant: 'success' });
+                                        }
+                                        catch (err) {
+                                            console.error("Failed to update task status:", err);
+                                            enqueueSnackbar(`Failed to update task "${getTruncatedTitle(task.title)}" status. Please try again.`, { variant: 'error' });
+                                        }
+                                    }}
+                                />
+                            ))}
+                            <div className={styles["footer"]}/>
+                        </>
                     ) : (
                         <div className={styles["no-data"]}>
                             No tasks available.
