@@ -1,13 +1,13 @@
-import { useRef } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 import CustomDropdown from "../../../components/dropdowns/CustomDropdown";
-import { FormFieldStyle, FormFieldState } from "../../../components/input/Input";
+import { FormFieldState, FormFieldStyle } from "../../../components/input/Input";
 import Tag from "../../../components/tag/Tag";
 import { convertDevelopersToMap, Developer, filterDevelopersBySkills } from "../../../models/developer";
 import { TaskStatus, TaskStatusDisplay } from "../../../models/TaskStatus";
 import { TaskTreeMap } from "../../../services/dto/tasks/getTasks";
 import { COLORS } from "../../../styles/stylings";
 import styles from "./NestedRow.module.scss";
-import { IoIosArrowDown } from "react-icons/io";
+import { useEffect, useRef, useState } from "react";
 
 function NestedRow({
     rowData,
@@ -20,14 +20,48 @@ function NestedRow({
     onAssigneeChange: (developerId: number, taskId: number) => void;
     onStatusChange: (status: TaskStatus, taskId: number) => void;
 }) {
-    const hasChildren = useRef(rowData.childTasks && rowData.childTasks.length > 0);
+
+    const hasChildren = rowData.childTasks && rowData.childTasks.length > 0;
+    const [isExpanded, setIsExpanded] = useState(true);
+    const [height, setHeight] = useState<string | number>("auto");
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const childContainerRef = contentRef.current;
+
+        if (!childContainerRef) return;
+
+        if (isExpanded) {
+            const scrollHeight = childContainerRef.scrollHeight;
+            setHeight(scrollHeight + "px");
+
+            const timeout = setTimeout(() => {
+                setHeight("auto");
+            }, 300);
+            return () => clearTimeout(timeout);
+        } else {
+            const currentHeight = childContainerRef.scrollHeight;
+            requestAnimationFrame(() => {
+                setHeight(currentHeight + "px");
+                requestAnimationFrame(() => {
+                    setHeight("0px");
+                });
+            });
+        }
+
+    }, [isExpanded, rowData.childTasks.length]);
 
 
     return (
         <div className={styles["group-row"]}>
             <div className={styles.row}>
-                <div className={styles.indent} style={{ width: `${rowData.depth * 1}rem` }} />
-                <IoIosArrowDown className={styles["toggle-icon"]} />
+                <div className={styles.indent} style={{ width: `${rowData.depth * 1 + ((!hasChildren && rowData.depth > 0) ? 2 : 0)}rem` }} />
+                {
+                    hasChildren && (
+                        <IoIosArrowDown className={`${styles["toggle-icon"]} ${!isExpanded ? "" : styles.collapsed}`} onClick={() => setIsExpanded(!isExpanded)} />
+                    )
+                }
+
                 <div
                     className={styles.title}
                     style={{
@@ -80,20 +114,24 @@ function NestedRow({
                     </div>
                 </div>
             </div>
-            {hasChildren.current && (
-                rowData.childTasks.map((child) => (
-                    <NestedRow
-                        key={child.id}
-                        rowData={child}
-                        developerData={developerData ? developerData : []}
-                        onAssigneeChange={(developerId, taskId) => {
-                            onAssigneeChange(developerId, taskId);
-                        }}
-                        onStatusChange={(status, taskId) => {
-                            onStatusChange(status, taskId);
-                        }}
-                    />
-                ))
+            {hasChildren && (
+                <div className={`${styles["children-rows"]}`} ref={contentRef} style={{ height: height }}>
+                    {
+                        rowData.childTasks.map((child) => (
+                            <NestedRow
+                                key={child.id}
+                                rowData={child}
+                                developerData={developerData ? developerData : []}
+                                onAssigneeChange={(developerId, taskId) => {
+                                    onAssigneeChange(developerId, taskId);
+                                }}
+                                onStatusChange={(status, taskId) => {
+                                    onStatusChange(status, taskId);
+                                }}
+                            />
+                        ))
+                    }
+                </div>
             )}
         </div>
     );
