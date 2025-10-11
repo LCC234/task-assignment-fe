@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: task-assignment-fe:${APP_VERSION}
+    container_name: task-assignment-fe
+    ports:
+      - "5173:80"
+    env_file:
+      - ./.env
+    networks:
+      - task_assignment_network
+
+networks:
+  task_assignment_network:
+    external: true
+    name: task_assignment_network
