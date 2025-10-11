@@ -20,13 +20,11 @@ function AddTaskFormComponent({
 
     return (
         <div className={styles.container}>
-            <div className={styles["parent-task-title"]}>
-                {parentTaskTitle && formData.depth > 0 && (
-                    <>
-                        Parent Task - <span className={styles["parent-task-title"]}>{parentTaskTitle}</span>
-                    </>
-                )}
-            </div>
+            {parentTaskTitle && formData.depth > 0 && (
+                <div className={styles["parent-task-title"]}>
+                    Parent Task - <span className={styles["parent-task-title"]}>{parentTaskTitle}</span>
+                </div>
+            )}
             <TextInput
                 label="Title"
                 value={formData.title}

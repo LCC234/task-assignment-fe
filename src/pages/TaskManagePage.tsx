@@ -124,12 +124,12 @@ function TaskManagePage() {
                             setIsCreateTaskFormModalOpen(true);
                             setParentTaskTitle(parentTaskTitle ? parentTaskTitle : "");
                         }}
-                        onAddChildClick={(depth: number, taskId: number | null, parentTaskTitle: string | null) => {
-                            console.log("depth, taskId, parentTaskTitle", depth, taskId, parentTaskTitle);
+                        onAddChildClick={(depth: number, taskId: number | null, taskName: string | null) => {
+                            
                             setCreateTaskFormData(defaultAddTaskForm(depth + 1, taskId));
                             setIsTaskTreeModalOpen(false);
                             setIsCreateTaskFormModalOpen(true);
-                            setParentTaskTitle(parentTaskTitle ? parentTaskTitle : "");
+                            setParentTaskTitle(taskName ? taskName : "");
                         }}
                         onDeleteClick={() => { }}
                         onEditClick={(task: Task) => {
