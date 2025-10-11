@@ -7,12 +7,13 @@ A web application for managing tasks with hierarchical relationships, built with
 ## Tech Stack
 - React
 - TypeScript
-- Material-UI
-- Axios
-- React RTK Query
-- SCSS
-- Notistack
-- Vite
+- Material-UI: for UI components and styling.
+- Axios: for making HTTP requests.
+- React RTK Query: for state management and data fetching.
+- SCSS: for styling.
+- Notistack: for snackbars and notifications.
+- React Router: for routing and navigation.
+- Vite: for development and build tooling.
 
 ## Features
 - Create, and manage tasks with parent-child relationships.
