@@ -58,7 +58,7 @@
                 align-items: center;
                 justify-content: center;
 
-                .assignee-status {
+                .status-dropdown {
                     width: 8rem;
                 }
             }
@@ -72,6 +72,11 @@
                 .assignee-dropdown {
                     width: 10rem;
                 }
+            }
+
+            .status-label {
+                font-size: 0.85rem;
+                font-family: vars.$base-font-family;
             }
         }
     }

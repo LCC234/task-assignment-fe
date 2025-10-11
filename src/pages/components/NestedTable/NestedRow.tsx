@@ -65,7 +65,7 @@ function NestedRow({
                 <div
                     className={styles.title}
                     style={{
-                        fontSize: `${rowData.depth < 5 ? 1 - rowData.depth * 0.1 : 0.5}rem`,
+                        fontSize: `${rowData.depth > 1 ? 0.85 :  1}rem`,
                         fontWeight: `${rowData.depth > 1 ? 400 : 500}`,
                     }}
                 >
@@ -83,18 +83,26 @@ function NestedRow({
                     </div>
 
                     <div className={styles.status}>
-                        <CustomDropdown
-                            label={""}
-                            items={TaskStatusDisplay}
-                            value={rowData.status}
-                            onChange={(event) => {
-                                console.log(event.target.value);
-                                onStatusChange(event.target.value as TaskStatus, rowData.id);
-                            }}
-                            styleType={FormFieldStyle.BASIC_NO_LABEL}
-                            state={FormFieldState.ENABLE}
-                            className={styles["assignee-status"]}
-                        />
+                        {
+                            hasChildren ? (
+                                <div className={styles["status-label"]}>
+                                    {TaskStatusDisplay[rowData.status]}
+                                </div>
+                            ) : (
+                                <CustomDropdown
+                                    label={""}
+                                    items={TaskStatusDisplay}
+                                    value={rowData.status}
+                                    onChange={(event) => {
+                                        onStatusChange(event.target.value as TaskStatus, rowData.id);
+                                    }}
+                                    styleType={FormFieldStyle.BASIC_NO_LABEL}
+                                    state={FormFieldState.ENABLE}
+                                    className={styles["status-dropdown"]}
+                                />
+                            )
+                        }
+
                     </div>
 
                     <div className={styles.assignee}>
@@ -103,8 +111,6 @@ function NestedRow({
                             items={convertDevelopersToMap(filterDevelopersBySkills(developerData, rowData.skillIds))}
                             value={rowData.assignedDeveloperId ? rowData.assignedDeveloperId.toString() : ""}
                             onChange={(event) => {
-                                console.log(event.target.value);
-                                // rowData.assignedDeveloperId = Number(event.target.value);
                                 onAssigneeChange(Number(event.target.value), rowData.id);
                             }}
                             styleType={FormFieldStyle.BASIC_NO_LABEL}
