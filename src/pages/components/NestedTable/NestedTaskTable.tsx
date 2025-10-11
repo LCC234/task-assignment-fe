@@ -29,12 +29,13 @@ function NestedTaskTable({
     return (
         <div className={styles.table}>
             <div className={styles.header}>
-                Task Tree
+                <div className={styles["header-left"]}>
+                    <div className={styles["header-task-title"]}>Task</div>
+                </div>
                 <div className={styles["header-right"]}>
                     <div className={styles["header-skill-title"]}>Skills</div>
                     <div className={styles["header-status-title"]}>Status</div>
                     <div className={styles["header-assignee-title"]}>Assignee</div>
-
                 </div>
             </div>
             <div className={styles.body}>
